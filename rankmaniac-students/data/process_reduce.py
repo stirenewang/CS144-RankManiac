@@ -4,10 +4,14 @@ import sys
 tuples = []
 iteration = 0
 lines = []
-iteration = 2
 for line in sys.stdin:
-    #    if line[0] == 'i': READ ITERATION HERE
-    #        iteration = int(line[1]) + 1
+    if len(sys.argv) == 2 and int(sys.argv[1]) == 50:
+            iteration = 50
+    else:
+        iteration = 0
+    #if line[0] == 'i': # READ ITERATION HERE; this will only be on last file
+    #    iteration = int(line[1]) + 1
+
     lines.append(line)
     line_tab = line.split('\t')
     line_info = line_tab[1].split(',')
