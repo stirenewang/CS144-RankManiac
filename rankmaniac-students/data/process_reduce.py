@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from shutil import copyfile
 import sys
 tuples = []
 iteration = 0
@@ -31,4 +30,3 @@ else:
     #sys.stdout.write('i' + str(iteration + 1) + '\n')
     for i in range(len(lines)):
         sys.stdout.write('NodeId:' + lines[i])
-    copyfile("output.txt", "input.txt")
