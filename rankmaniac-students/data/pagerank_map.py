@@ -9,9 +9,15 @@ for line in sys.stdin:
     node_id = int(line_tab[0][7:])
     curr_pr = float(line_info[0])
     prev_pr = float(line_info[1])
-    outlinks = [int(float(x)) for x in line_info[2:]]
 
     sys.stdout.write(str(node_id) + '\t' + 'p,' + line_tab[1] + '\n')
+
+    # no outlinks
+    if len(line_info) <= 2:
+        sys.stdout.write(str(node_id) + '\t1\n')
+        break
+
+    outlinks = [int(float(x)) for x in line_info[2:]]
 
     for link in outlinks:
         key = link
