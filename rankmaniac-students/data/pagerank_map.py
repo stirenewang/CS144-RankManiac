@@ -10,6 +10,16 @@ for line in sys.stdin:
 	outlinks = outlinks.split(',')
 	outlinks = [int(x) for x in outlinks]
 
+	# return list with all outlinked pages as keys
+	# corresponding values are pagerank of origin page divided by total num of outlinks
+	# from origin page
+	# also append to list pair with key the origin page and value 0
+
+	for link in outlinks:
+		key = link
+		value = curr_pr / len(outlinks)
+		sys.stdout.write(key + '\t' + value)
+
 
 
 
