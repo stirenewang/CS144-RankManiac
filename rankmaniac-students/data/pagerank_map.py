@@ -9,7 +9,7 @@ for line in sys.stdin:
     node_id = int(line_tab[0][7:])
     curr_pr = float(line_info[0])
     prev_pr = float(line_info[1])
-    outlinks = [int(x) for x in line_info[2:]]
+    outlinks = [int(float(x)) for x in line_info[2:]]
 
     if '\n' in line_tab[1]:
         sys.stdout.write(str(node_id) + '\t' + 'p,' + line_tab[1])
