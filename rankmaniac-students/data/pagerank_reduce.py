@@ -8,19 +8,20 @@ prev = -1
 lst_values = []
 
 for line in sys.stdin:
-    temp = line.split('\t')
+    line_tab = line.split('\t')
+    line_info = line_tab[1].split(',')
 
-    if prev == -1:
-    	prev = int(temp[0])
+    node_id = int(line_tab[0])
 
-    if prev == int(temp[0]):
-    	lst_values.append(alpha * float(temp[1]) + 1.0 - alpha)
+    if line_info[0] == 'p':
+        sum_vals = alpha * sum(lst_values) + 1.0 - alpha
+        
+        curr_pr = sum_vals
+        prev_pr = float(line_info[1])
+        outlinks = ','.join(line_info[3:])
+
+        sys.stdout.write(str(node_id) + '\t' + str(curr_pr) + ',' + str(prev_pr) + ',' + outlinks)
+
+        lst_values = []
     else:
-    	sum_vals = sum(lst_values)
-    	sys.stdout.write(str(prev) + '\t' + str(sum(lst_values)) + '\n')
-
-    	lst_values = [float(temp[1])]
-    	prev = int(temp[0])
-
-if len(lst_values) == 1:
-	sys.stdout.write(str(prev) + '\t' + str(sum(lst_values)) + '\n')
+        lst_values.append(float(line_tab[1]))
