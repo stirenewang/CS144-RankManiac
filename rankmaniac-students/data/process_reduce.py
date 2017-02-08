@@ -43,4 +43,7 @@ if iteration == 50 or converged:
 else:
     sys.stdout.write("i" + "\t" + str(iteration + 1) + "\n")
     for i in range(len(lines)):
-        sys.stdout.write('NodeId:' + lines[i])
+        # don't concatenate iteration
+        if not lines[i].startswith('i'):            
+            #print node IDs
+            sys.stdout.write('NodeId:' + lines[i])
