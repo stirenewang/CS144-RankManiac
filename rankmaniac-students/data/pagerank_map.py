@@ -11,6 +11,7 @@ for line in sys.stdin:
         iteration = int(line_tab[1]) # print iteration
         sys.stdout.write("i" + "\t" + str(iteration) + "\n")
     else:
+        assert line_tab[0].startswith("NodeId:")
         node_id = int(line_tab[0][7:])
         curr_pr = float(line_info[0])
         prev_pr = float(line_info[1])

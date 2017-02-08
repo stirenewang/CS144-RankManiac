@@ -40,6 +40,7 @@ sorted_tuples = sorted_tuples[::-1]
 if iteration == 50 or converged:
     for i in range(20):
         sys.stdout.write('FinalRank:' + str(sorted_tuples[i][1]) + '\t' + str(sorted_tuples[i][0]) + '\n')
+    sys.exit()
 else:
     sys.stdout.write("i" + "\t" + str(iteration + 1) + "\n")
     for i in range(len(lines)):
