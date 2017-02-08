@@ -4,7 +4,6 @@ import sys
 
 alpha = 0.85
 
-prev = -1
 lst_values = []
 
 for line in sys.stdin:
@@ -18,9 +17,12 @@ for line in sys.stdin:
         
         curr_pr = sum_vals
         prev_pr = float(line_info[1])
-        outlinks = ','.join(line_info[3:])
 
-        sys.stdout.write(str(node_id) + '\t' + str(curr_pr) + ',' + str(prev_pr) + ',' + outlinks)
+        if len(line_info) > 3:
+            outlinks = ','.join(line_info[3:])
+            sys.stdout.write(str(node_id) + '\t' + str(curr_pr) + ',' + str(prev_pr) + ',' + outlinks)
+        else:
+            sys.stdout.write(str(node_id) + '\t' + str(curr_pr) + ',' + str(prev_pr) + '\n')
 
         lst_values = []
     else:
