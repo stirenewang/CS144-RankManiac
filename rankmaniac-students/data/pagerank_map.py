@@ -1,31 +1,28 @@
 #!/usr/bin/env python
 
 import sys
-iteration = 0
 for line in sys.stdin:
-
     line_tab = line.strip().split('\t')
     line_info = line_tab[1].split(',')
 
-    if line_tab[0] == "i":  # check if first line
-        iteration = int(line_tab[1]) # print iteration
-        sys.stdout.write("i" + "\t" + str(iteration) + "\n")
-    else:
+    if line_tab[0] == "i":          # If line has iteration data
+        iteration = line_tab[1]     # print iteration
+        sys.stdout.write("i" + "\t" + iteration + "\n")
+    else:                           # If line has graph data
         assert line_tab[0].startswith("NodeId:")
-        node_id = int(line_tab[0][7:])
-        curr_pr = float(line_info[0])
-        prev_pr = float(line_info[1])
+        node_id = line_tab[0][7:]
+        
+        if len(line_info) > 2:      # if node has outlinks
+            outlinks = line_info[2:]    # Get out-links as strings
+            curr_pr = float(line_info[0])
 
-        if len(line_info) > 2:
-            outlinks = [int(float(x)) for x in line_info[2:]]
-
+            value = str(curr_pr / len(outlinks))
             for link in outlinks:
-                key = link
-                value = curr_pr / len(outlinks)
-                sys.stdout.write(str(key) + '\t' + str(value) + '\n')
+                sys.stdout.write(link + '\t' + value + '\n')
 
-            sys.stdout.write(str(node_id) + '\t0\n')
-        else:
-            sys.stdout.write(str(node_id) + '\t1\n')
+            sys.stdout.write(node_id + '\t0\n')
+        else:                       # if node doesn't have outlinks
+            sys.stdout.write(node_id + '\t1\n')
 
-        sys.stdout.write(str(node_id) + '\t' + 'p,' + line_tab[1] + '\n')
+        # Print graph data
+        sys.stdout.write(node_id + '\t' + 'p,' + line_tab[1] + '\n')
