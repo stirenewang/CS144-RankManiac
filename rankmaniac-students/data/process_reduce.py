@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 
 import sys
-import numpy as np
 import heapq
 from operator import itemgetter
 
 lines = []
 iteration = 0
 converged = True
-currpr = []
-prevpr = []
+curr_pr = []
+prev_pr = []
 
 for line in sys.stdin:
     lines.append(line)
@@ -22,19 +21,14 @@ for line in sys.stdin:
         node_id = line_tab[0]
         
         pr = map(float, line_info[:2])
-        # change = abs(pr[0] - pr[1])
 
-        # if change > tolerance:
-        #     converged = False
-
-        currpr.append((node_id, pr[0]))
-        prevpr.append((node_id, pr[0]))
+        curr_pr.append((node_id, pr[0]))
+        prev_pr.append((node_id, pr[0]))
 
 top_curr = heapq.nlargest(30, currpr, key=itemgetter(1))
 top_prev = heapq.nlargest(30, prevpr, key=itemgetter(1))
-print top_curr
-print top_prev
-for i in range(30):
+
+for i in range(len(top_curr)):
     if top_curr[i][0] != top_prev[i][0]:
         converged = False
         break
