@@ -3,13 +3,12 @@
 import sys
 for line in sys.stdin:
     line_tab = line.strip().split('\t')
-    line_info = line_tab[1].split(',')
 
-    if line_tab[0] == "i":          # If line has iteration data
-        iteration = line_tab[1]     # print iteration
-        sys.stdout.write("i" + "\t" + iteration + "\n")
+    if line_tab[0] == "i" or line_tab[0] == 'c':  # If line has iteration data
+        sys.stdout.write(line)
     else:                           # If line has graph data
-        assert line_tab[0].startswith("NodeId:")
+        line_info = line_tab[1].split(',')
+
         node_id = line_tab[0][7:]
         
         if len(line_info) > 2:      # if node has outlinks
