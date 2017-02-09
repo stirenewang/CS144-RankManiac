@@ -29,8 +29,8 @@ for line in sys.stdin:
         prev_pr.append((node_id, pr[1]))
 
 
-top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
-top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
+top_prev = heapq.nlargest(50, prev_pr, key=itemgetter(1))
+top_curr = heapq.nlargest(50, curr_pr, key=itemgetter(1))
 
 for i in range(len(top_curr)):
     if top_curr[i][0] != top_prev[i][0]:
@@ -40,12 +40,12 @@ for i in range(len(top_curr)):
 if converged == True:
     counter += 1
 
-if iteration == 49 or counter == 2:
+if iteration == 49 or counter == 3:
     top = top_curr[:20]
 
     for tup in top:
         #sys.stdout.write('FinalRank:' + str(tup[1]) + '\t' + tup[0] + '\n')
-        sys.stdout.write('FinalRank:%s\t%s\n' %(str(tup[1]), tup[0]))
+        sys.stdout.write('FinalRank:%s\t%s\n' % (str(tup[1]), tup[0]))
 else:
     #sys.stdout.write('i' + '\t' + str(iteration + 1) + '\n')
     #sys.stdout.write('c' + '\t' + str(counter) + '\n')

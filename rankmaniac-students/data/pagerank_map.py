@@ -4,7 +4,7 @@ import sys
 for line in sys.stdin:
     line_tab = line.strip().split('\t')
 
-    if line_tab[0] == "i" or line_tab[0] == 'c':  # If line has iteration data
+    if line_tab[0] == 'i' or line_tab[0] == 'c':  # If line has iteration data
         sys.stdout.write(line)
     else:                           # If line has graph data
         line_info = line_tab[1].split(',')
@@ -18,13 +18,13 @@ for line in sys.stdin:
             value = str(curr_pr * k)
             for link in outlinks:
                 #sys.stdout.write(link + '\t' + value + '\n')
-                sys.stdout.write("%s\t%s\n" %(link,value))
+                sys.stdout.write('%s\t%s\n' % (link, value))
 
             #sys.stdout.write(node_id + '\t0\n')
-            sys.stdout.write("%s\t0\n" % node_id)
+            sys.stdout.write('%s\t0\n' % node_id)
         else:                       # if node doesn't have outlinks
             sys.stdout.write(node_id + '\t1\n')
 
         # Print graph data
         #sys.stdout.write(node_id + '\t' + 'p,' + line_tab[1] + '\n')
-        sys.stdout.write("%s\tp,%s\n" %(node_id, line_tab[1]))
+        sys.stdout.write('%s\tp,%s\n' % (node_id, line_tab[1]))
