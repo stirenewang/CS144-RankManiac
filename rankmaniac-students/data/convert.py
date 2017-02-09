@@ -11,7 +11,7 @@ def main(filename, out):
 	for line in f:
 		lines = line.strip().split('\t')
 		node = int(lines[0])
-		connecting = lines[1][:-1]
+		connecting = lines[1]
 		if node not in Graph:
 			Graph[node] = [connecting]
 		else: Graph[node].append(connecting)
