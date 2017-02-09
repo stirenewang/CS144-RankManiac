@@ -44,11 +44,15 @@ if iteration == 49 or counter == 2:
     top = top_curr[:20]
 
     for tup in top:
-        sys.stdout.write('FinalRank:' + str(tup[1]) + '\t' + tup[0] + '\n')
+        #sys.stdout.write('FinalRank:' + str(tup[1]) + '\t' + tup[0] + '\n')
+        sys.stdout.write('FinalRank:%s\t%s\n' %(str(tup[1]), tup[0]))
 else:
-    sys.stdout.write('i' + '\t' + str(iteration + 1) + '\n')
-    sys.stdout.write('c' + '\t' + str(counter) + '\n')
+    #sys.stdout.write('i' + '\t' + str(iteration + 1) + '\n')
+    #sys.stdout.write('c' + '\t' + str(counter) + '\n')
+    sys.stdout.write('i\t%s\n' % str(iteration + 1))
+    sys.stdout.write('c\t%s\n' % str(counter))
 
     for lin in lines:
         if not lin.startswith('i') and not lin.startswith('c'):
-            sys.stdout.write('NodeId:' + lin)
+            #sys.stdout.write('NodeId:' + lin)
+            sys.stdout.write('NodeId:%s' % lin)

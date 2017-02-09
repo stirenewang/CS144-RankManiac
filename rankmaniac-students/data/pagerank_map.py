@@ -17,11 +17,14 @@ for line in sys.stdin:
             k = 1.0 / len(outlinks)
             value = str(curr_pr * k)
             for link in outlinks:
-                sys.stdout.write(link + '\t' + value + '\n')
+                #sys.stdout.write(link + '\t' + value + '\n')
+                sys.stdout.write("%s\t%s\n" %(link,value))
 
-            sys.stdout.write(node_id + '\t0\n')
+            #sys.stdout.write(node_id + '\t0\n')
+            sys.stdout.write("%s\t0\n" % node_id)
         else:                       # if node doesn't have outlinks
             sys.stdout.write(node_id + '\t1\n')
 
         # Print graph data
-        sys.stdout.write(node_id + '\t' + 'p,' + line_tab[1] + '\n')
+        #sys.stdout.write(node_id + '\t' + 'p,' + line_tab[1] + '\n')
+        sys.stdout.write("%s\tp,%s\n" %(node_id, line_tab[1]))

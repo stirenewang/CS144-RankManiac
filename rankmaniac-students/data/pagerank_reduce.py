@@ -23,10 +23,11 @@ for line in sys.stdin:
 
             if len(line_info) > 3:
                 outlinks = ','.join(line_info[3:])
-                sys.stdout.write(node_id + '\t' + str(curr_pr) + ',' + prev_pr + ',' + outlinks)
+                #sys.stdout.write(node_id + '\t' + str(curr_pr) + ',' + prev_pr + ',' + outlinks)
+                sys.stdout.write("%s\t%s,%s,%s" %(node_id, str(curr_pr), prev_pr, outlinks))
             else:
-                sys.stdout.write(node_id + '\t' + str(curr_pr) + ',' + prev_pr + '\n')
-
+                #sys.stdout.write(node_id + '\t' + str(curr_pr) + ',' + prev_pr + '\n')
+                sys.stdout.write("%s\t%s,%s\n" %(node_id, str(curr_pr), prev_pr))
             lst_values = []
         else:
             lst_values.append(float(line_tab[1]))
