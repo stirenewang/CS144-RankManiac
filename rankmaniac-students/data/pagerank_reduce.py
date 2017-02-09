@@ -11,8 +11,9 @@ for line in sys.stdin:
     line_info = line_tab[1].split(',')
 
     if line_tab[0] == "i":  # check if first line
-        iteration = int(line_tab[1]) # print iteration
-        sys.stdout.write("i" + "\t" + str(iteration) + "\n")
+        sys.stdout.write(line)
+    elif line_tab[0] == 'c':
+        sys.stdout.write(line)
     else:  
         node_id = int(line_tab[0])
 
