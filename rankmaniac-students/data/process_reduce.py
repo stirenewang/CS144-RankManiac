@@ -5,7 +5,7 @@ import sys
 tuples = []
 lines = []
 iteration = 0
-tolerance = 0.00001
+tolerance = 0.001
 converged = True
 
 for line in sys.stdin:
@@ -34,10 +34,9 @@ for line in sys.stdin:
             converged = False
         tuples.append((node_id, curr_pr))
 
-sorted_tuples = sorted(tuples, key=lambda x: x[1])
-sorted_tuples = sorted_tuples[::-1]
-
 if iteration == 50 or converged:
+    sorted_tuples = sorted(tuples, key=lambda x: x[1])[-20:]
+    sorted_tuples = sorted_tuples[::-1]
     for i in range(20):
         sys.stdout.write('FinalRank:' + str(sorted_tuples[i][1]) + '\t' + str(sorted_tuples[i][0]) + '\n')
 else:
