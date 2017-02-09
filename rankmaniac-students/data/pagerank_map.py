@@ -23,7 +23,8 @@ for line in sys.stdin:
             #sys.stdout.write(node_id + '\t0\n')
             sys.stdout.write('%s\t0\n' % node_id)
         else:                       # if node doesn't have outlinks
-            sys.stdout.write(node_id + '\t1\n')
+            #sys.stdout.write(node_id + '\t1\n')
+            sys.stdout.write('%s\t1\n' % node_id)
 
         # Print graph data
         #sys.stdout.write(node_id + '\t' + 'p,' + line_tab[1] + '\n')
