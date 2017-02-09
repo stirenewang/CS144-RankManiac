@@ -9,7 +9,7 @@ def main(filename, out):
 	f = open(filename, 'r')
 	f1 = open(out, 'w')
 	for line in f:
-		lines = line.split('\t')
+		lines = line.strip().split('\t')
 		node = int(lines[0])
 		connecting = lines[1][:-1]
 		if node not in Graph:
