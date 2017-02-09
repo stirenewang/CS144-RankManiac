@@ -33,7 +33,7 @@ if iteration == 49 or converged:
     top = heapq.nlargest(20, tuples, key=itemgetter(1))
 
     for tup in top:
-        sys.stdout.write('FinalRank:' + tup[0] + '\t' + str(tup[1]) + '\n')
+        sys.stdout.write('FinalRank:' + tup[1] + '\t' + str(tup[0]) + '\n')
 else:
     sys.stdout.write('i' + '\t' + str(iteration + 1) + '\n')
 
