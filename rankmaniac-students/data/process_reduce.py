@@ -25,8 +25,8 @@ for line in sys.stdin:
         curr_pr.append((node_id, pr[0]))
         prev_pr.append((node_id, pr[0]))
 
-top_curr = heapq.nlargest(30, currpr, key=itemgetter(1))
-top_prev = heapq.nlargest(30, prevpr, key=itemgetter(1))
+top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
+top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
 
 for i in range(len(top_curr)):
     if top_curr[i][0] != top_prev[i][0]:
