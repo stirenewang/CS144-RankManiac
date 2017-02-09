@@ -9,7 +9,6 @@ for line in sys.stdin:
     else:                           # If line has graph data
         line_info = line_tab[1].split(',')
 
-        assert line_tab[0].startswith("NodeId:")
         node_id = line_tab[0][7:]
         
         if len(line_info) > 2:      # if node has outlinks
