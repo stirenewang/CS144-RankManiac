@@ -8,13 +8,11 @@ lst_values = []
 
 for line in sys.stdin:
     line_tab = line.split('\t')
-    line_info = line_tab[1].split(',')
 
-    if line_tab[0] == "i":  # check if first line
-        sys.stdout.write(line)
-    elif line_tab[0] == 'c':
+    if line_tab[0] == "i" or line_tab[0] == 'c':  # check if first line
         sys.stdout.write(line)
     else:  
+        line_info = line_tab[1].split(',')
         node_id = int(line_tab[0])
 
         if line_info[0] == 'p':

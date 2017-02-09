@@ -14,13 +14,13 @@ prev_pr = []
 for line in sys.stdin:
     lines.append(line)
     line_tab = line.strip().split('\t')
-    line_info = line_tab[1].split(',')
 
     if line_tab[0] == "i":
         iteration = int(line_tab[1])
     elif line_tab[0] == 'c':
         counter = int(line_tab[1])
     else:
+        line_info = line_tab[1].split(',')
         node_id = line_tab[0]
         
         pr = map(float, line_info[:2])

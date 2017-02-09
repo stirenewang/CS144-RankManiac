@@ -3,13 +3,12 @@
 import sys
 for line in sys.stdin:
     line_tab = line.strip().split('\t')
-    line_info = line_tab[1].split(',')
 
-    if line_tab[0] == "i":          # If line has iteration data
-        sys.stdout.write(line)
-    elif line_tab[0] == 'c':
+    if line_tab[0] == "i" or line_tab[0] == 'c':  # If line has iteration data
         sys.stdout.write(line)
     else:                           # If line has graph data
+        line_info = line_tab[1].split(',')
+
         assert line_tab[0].startswith("NodeId:")
         node_id = line_tab[0][7:]
         
