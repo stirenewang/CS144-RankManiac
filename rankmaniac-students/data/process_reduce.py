@@ -23,7 +23,7 @@ for line in sys.stdin:
         pr = map(float, line_info[:2])
 
         curr_pr.append((node_id, pr[0]))
-        prev_pr.append((node_id, pr[0]))
+        prev_pr.append((node_id, pr[1]))
 
 top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
 top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
@@ -33,7 +33,7 @@ for i in range(len(top_curr)):
         converged = False
         break
 
-if iteration == 49 or converged:
+if iteration == 49 or converged :
     top = top_curr[:20]
 
     for tup in top:
