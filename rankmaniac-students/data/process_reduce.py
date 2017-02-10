@@ -36,7 +36,7 @@ for i in range(len(top_curr)):
     if top_curr[i][0] != top_prev[i][0]:
         counter = 0
         converged = False
-        break
+        #break
 if converged == True:
     counter += 1
 

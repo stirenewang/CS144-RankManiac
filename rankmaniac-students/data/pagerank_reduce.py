@@ -21,7 +21,7 @@ for line in sys.stdin:
             curr_pr = sum_vals
             prev_pr = line_info[1]
 
-            if len(line_info) >= 3:
+            if len(line_info) > 3:
                 outlinks = ','.join(line_info[3:])
                 #sys.stdout.write(node_id + '\t' + str(curr_pr) + ',' + prev_pr + ',' + outlinks)
                 sys.stdout.write('%s\t%s,%s,%s' %(node_id, str(curr_pr), prev_pr, outlinks))
