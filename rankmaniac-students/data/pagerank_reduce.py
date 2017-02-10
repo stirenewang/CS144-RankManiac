@@ -31,14 +31,14 @@ for line in sys.stdin:
 
         if line_info[0] != 'p':  # if line has pagerank contribution, adds to pr_cont
             pr_cont = float(line_info[0])
-            if node_id not in pr_conts.keys():
-                pr_conts[node_id] = pr_cont
-            else:
-                pr_conts[node_id] += pr_cont
-            # try:
-            #     pr_conts[node_id] += pr_cont
-            # except KeyError:
+            # if node_id not in pr_conts.keys():
             #     pr_conts[node_id] = pr_cont
+            # else:
+            #     pr_conts[node_id] += pr_cont
+            try:
+                pr_conts[node_id] += pr_cont
+            except KeyError:
+                pr_conts[node_id] = pr_cont
         else: # if line contains p, adds to graph_info
             graph_info[node_id] = line_info[1:]
 

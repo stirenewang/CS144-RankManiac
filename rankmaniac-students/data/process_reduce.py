@@ -36,7 +36,7 @@ for line in sys.stdin:
         curr_pr.append((node_id, pr[0]))
         prev_pr.append((node_id, pr[1]))
 
-# gets nodes with top 40 prev and curr pageranks
+# gets nodes with top 30 prev and curr pageranks
 top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
 top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
 
@@ -62,6 +62,7 @@ else:
     sys.stdout.write('i\t%s\n' % str(iteration + 1))
     sys.stdout.write('c\t%s\n' % str(counter))
 
-    for lin in lines:
-        if not lin.startswith('i') and not lin.startswith('c'):
-            sys.stdout.write('NodeId:%s' % lin)
+    new_lines = [x for x in lines if not x.startswith('i') and not x.startswith('c')]
+
+    for lin in new_lines:
+        sys.stdout.write('NodeId:%s' % lin)
