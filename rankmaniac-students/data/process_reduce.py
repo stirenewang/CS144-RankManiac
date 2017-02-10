@@ -31,12 +31,12 @@ for line in sys.stdin:
 
 top_prev = heapq.nlargest(50, prev_pr, key=itemgetter(1))
 top_curr = heapq.nlargest(50, curr_pr, key=itemgetter(1))
-
-for i in range(len(top_curr)):
+i  = 0
+while i < len(top_curr) and converged:
     if top_curr[i][0] != top_prev[i][0]:
         counter = 0
         converged = False
-        #break
+    i += 1
 if converged == True:
     counter += 1
 
