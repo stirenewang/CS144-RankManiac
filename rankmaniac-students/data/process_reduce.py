@@ -40,7 +40,7 @@ for i in range(len(top_curr)):
 if converged == True:
     counter += 1
 
-if iteration == 49 or counter == 3:
+if iteration == 49 or counter == 50:
     top = top_curr[:20]
 
     for tup in top:

@@ -14,8 +14,7 @@ for line in sys.stdin:
         if len(line_info) > 2:      # if node has outlinks
             outlinks = line_info[2:]    # Get out-links as strings
             curr_pr = float(line_info[0])
-            k = 1.0 / len(outlinks)
-            value = str(curr_pr * k)
+            value = str(curr_pr/len(outlinks))
             for link in outlinks:
                 #sys.stdout.write(link + '\t' + value + '\n')
                 sys.stdout.write('%s\t%s\n' % (link, value))
