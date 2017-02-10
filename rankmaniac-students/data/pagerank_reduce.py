@@ -2,42 +2,49 @@
 
 import sys
 
-alpha = 0.85        # page rank calculate
+alpha = 0.85
 
-# Dictionary of node page ranks on this iteration
-node_pr = {}        # key: nodeID (string)
-                    # value: contribution (float)
+# key: node_id (str)
+# value: pagerank contribution (float)
+pr_conts = {}
 
-# Dictionary of graph information (pline), indicated by 'p' before data
-# pline are lines that look like 'p',curr_pr,prev_pr, outlinks.....
-graph_data = {}     # key: nodeID (string)
-                    # value: [curr_pr (str), prev_pr (str), outlinks (str)]
+# key: node_id (str)
+# value: [curr_pr (str), prev_pr (str), outlinks (str)]
+graph_info = {}
 
+'''
+line looks like one of these:
+i\t{iteration}\n
+c\t{counter}\n
+{node_id}\t{pagerank contribution}\n
+{node_id}\tp,{curr_pr},{prev_pr},{outlinks}\n
+'''
 
 for line in sys.stdin:
-    line_tab = line.split('\t')     # Separate line into node_id and info (contribution or pline)
+    line_tab = line.split('\t')
 
-    if line_tab[0] == "i" or line_tab[0] == 'c':    # if line describes iteration or convergence counter
+    if line_tab[0] == "i" or line_tab[0] == 'c':  # if line has iteration/counter
         sys.stdout.write(line)
     else:
-        line_info = line_tab[1].strip().split(',', 3)   # get contribution/pline
-        node_id = line_tab[0]                           # get node ID (string)
+        line_info = line_tab[1].strip().split(',', 3) 
+        node_id = line_tab[0]
 
-        if line_info[0] != 'p':                     # If line describes contribution to page rank
-            cont = float(line_info[0])              # get contribution
-            try:                                    # add contribution to dictionary of node's pagerank
-                node_pr[node_id] += cont
+        if line_info[0] != 'p':  # if line has pagerank contribution, adds to pr_cont
+            pr_cont = float(line_info[0])
+            try:
+                pr_conts[node_id] += pr_cont
             except KeyError:
-                node_pr[node_id] = cont
-        else:                                       # If line is pline
-            graph_data[node_id] = line_info[1:]     # Store to pline dictionary (get rid of 'p')
+                pr_conts[node_id] = pr_cont
+        else: # if line contains p, adds to graph_info
+            graph_info[node_id] = line_info[1:]
 
-for n_id in node_pr.keys():                         # Iterate through nodes in pagerank dictionary
-    curr_pr = str(alpha*node_pr[n_id]+1.0-alpha)    # Calculate new page rank
-    prev_pr = graph_data[n_id][0]                   # Get last 'curr_pr' from pline
+for n_id in pr_conts.keys():
+    curr_pr = str(alpha * pr_conts[n_id] + 1.0 - alpha)  # calculates new pagerank
+    prev_pr = graph_info[n_id][0]
 
-    if len(graph_data[n_id]) > 2:                   # If this node has outlinks, print outlinks
-        outlinks = graph_data[n_id][2]              # Get string of outlinks
-        sys.stdout.write('%s\t%s,%s,%s\n' %(n_id, curr_pr, prev_pr, outlinks))
-    else:                                           # Otherwise don't print outlinks
-        sys.stdout.write('%s\t%s,%s\n' %(n_id, curr_pr, prev_pr))
+    if len(graph_data[n_id]) > 2:  # if node has outlinks
+        outlinks = graph_info[n_id][2:]
+        outlinks = ','.join(outlinks)
+        sys.stdout.write('%s\t%s,%s,%s\n' % (n_id, curr_pr, prev_pr, outlinks))
+    else:
+        sys.stdout.write('%s\t%s,%s\n' % (n_id, curr_pr, prev_pr))

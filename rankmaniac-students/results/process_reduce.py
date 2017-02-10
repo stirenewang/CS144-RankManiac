@@ -1,49 +1,58 @@
 #!/usr/bin/env python
 
 import sys
+import heapq
+from operator import itemgetter
 
-tuples = []
 lines = []
 iteration = 0
-tolerance = 0.00001
 converged = True
+counter = 0
+curr_pr = []
+prev_pr = []
 
 for line in sys.stdin:
-    #if len(sys.argv) == 2 and int(sys.argv[1]) == 50:
-    #        iteration = 50
-    #else:
-    #    iteration = 0
-
     lines.append(line)
-    line_tab = line.split('\t')
-    line_info = line_tab[1].split(',')
+    line_tab = line.strip().split('\t')
 
-    if line_tab[0] == "i": # first line
-        iteration = int(line_tab[1]) 
+    if line_tab[0] == "i":
+        iteration = int(line_tab[1])
+    elif line_tab[0] == 'c':
+        counter = int(line_tab[1])
     else:
-        node_id = int(line_tab[0])
+        line_info = line_tab[1].split(',')
+        node_id = line_tab[0]
         
-        # Check for convergence: 
-        # check prev_pr and curr_pr changes. If they are 
-        # greater than the tolerance, there is no convergence
-        curr_pr = float(line_info[0])
-        prev_pr = float(line_info[1])
+        pr = map(float, line_info[:2])
 
-        change = abs(curr_pr - prev_pr)
-        if change > tolerance:
-            converged = False
-        tuples.append((node_id, curr_pr))
+        curr_pr.append((node_id, pr[0]))
+        prev_pr.append((node_id, pr[1]))
 
-sorted_tuples = sorted(tuples, key=lambda x: x[1])
-sorted_tuples = sorted_tuples[::-1]
 
-if iteration == 50 or converged:
-    for i in range(20):
-        sys.stdout.write('FinalRank:' + str(sorted_tuples[i][1]) + '\t' + str(sorted_tuples[i][0]) + '\n')
+top_prev = heapq.nlargest(50, prev_pr, key=itemgetter(1))
+top_curr = heapq.nlargest(50, curr_pr, key=itemgetter(1))
+
+for i in range(len(top_curr)):
+    if top_curr[i][0] != top_prev[i][0]:
+        counter = 0
+        converged = False
+        break
+if converged == True:
+    counter += 1
+
+if iteration == 49 or counter == 3:
+    top = top_curr[:20]
+
+    for tup in top:
+        #sys.stdout.write('FinalRank:' + str(tup[1]) + '\t' + tup[0] + '\n')
+        sys.stdout.write('FinalRank:%s\t%s\n' % (str(tup[1]), tup[0]))
 else:
-    sys.stdout.write("i" + "\t" + str(iteration + 1) + "\n")
-    for i in range(len(lines)):
-        # don't concatenate iteration
-        if not lines[i].startswith('i'):            
-            #print node IDs
-            sys.stdout.write('NodeId:' + lines[i])
+    #sys.stdout.write('i' + '\t' + str(iteration + 1) + '\n')
+    #sys.stdout.write('c' + '\t' + str(counter) + '\n')
+    sys.stdout.write('i\t%s\n' % str(iteration + 1))
+    sys.stdout.write('c\t%s\n' % str(counter))
+
+    for lin in lines:
+        if not lin.startswith('i') and not lin.startswith('c'):
+            #sys.stdout.write('NodeId:' + lin)
+            sys.stdout.write('NodeId:%s' % lin)

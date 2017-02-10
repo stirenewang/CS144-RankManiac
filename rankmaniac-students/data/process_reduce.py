@@ -6,8 +6,8 @@ from operator import itemgetter
 
 lines = []
 iteration = 0
-converged = True
 counter = 0
+converged = True
 curr_pr = []
 prev_pr = []
 
@@ -15,7 +15,7 @@ for line in sys.stdin:
     lines.append(line)
     line_tab = line.strip().split('\t')
 
-    if line_tab[0] == "i":
+    if line_tab[0] == 'i':
         iteration = int(line_tab[1])
     elif line_tab[0] == 'c':
         counter = int(line_tab[1])
@@ -24,7 +24,6 @@ for line in sys.stdin:
         node_id = line_tab[0]
         
         pr = map(float, line_info[:2])
-
         curr_pr.append((node_id, pr[0]))
         prev_pr.append((node_id, pr[1]))
 
