@@ -24,9 +24,9 @@ for line in sys.stdin:
             for link in outlinks:
                 sys.stdout.write('%s\t%s\n' % (link, value))
 
-            # we probably don't need this
-            # sys.stdout.write('%s\t0\n' % node_id)
+            sys.stdout.write('%s\t0\n' % node_id)
         else:  # if node doesn't have outlinks
-            sys.stdout.write('%s\t1\n' % node_id)
+            curr_pr = line_info[0]
+            sys.stdout.write('%s\t%s\n' % (node_id, curr_pr))
 
         sys.stdout.write('%s\tp,%s\n' % (node_id, line_tab[1]))

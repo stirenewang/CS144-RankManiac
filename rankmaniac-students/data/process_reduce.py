@@ -40,7 +40,7 @@ for line in sys.stdin:
 top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
 top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
 
-#check for convergence, or up counter
+# check for convergence, or up counter
 i  = 0
 
 while i < len(top_curr) and converged:
