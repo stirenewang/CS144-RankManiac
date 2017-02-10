@@ -4,8 +4,6 @@ import sys
 import heapq
 from operator import itemgetter
 
-
-
 lines = []
 iteration = 0
 counter = 0
@@ -47,15 +45,13 @@ while i < len(top_curr) and converged:
     if top_curr[i][0] != top_prev[i][0]:
         counter = 0
         converged = False
-
     i += 1
 
 if converged == True:
     counter += 1
 
-if iteration == 49 or counter == 2:  # if converged
+if iteration == 49 or counter == 5:  # if converged
     top = top_curr[:20]
-
     for tup in top:
         sys.stdout.write('FinalRank:%s\t%s\n' % (str(tup[1]), tup[0]))
 else:

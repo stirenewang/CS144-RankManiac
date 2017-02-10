@@ -11,15 +11,17 @@ def main(filename, out):
 	for line in f:
 		lines = line.strip().split('\t')
 		node = int(lines[0])
-		connecting = lines[1]
+		outlink = int(lines[1])
 		if node not in Graph:
-			Graph[node] = [connecting]
-		else: Graph[node].append(connecting)
+			Graph[node] = [outlink]
+		else: Graph[node].append(outlink)
+		if outlink not in Graph:
+			Graph[outlink] = []
 	nodes = sorted(Graph)
 	for i in nodes:
 		f1.write('NodeId:' + str(i) + '\t1.0,0.0')
 		for j in Graph[i]:
-			f1.write(',' +j)
+			f1.write(',' + str(j))
 		f1.write('\n')
 	f1.close()
 

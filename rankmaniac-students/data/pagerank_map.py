@@ -20,7 +20,6 @@ for line in sys.stdin:
             outlinks = line_info[2:]
             curr_pr = float(line_info[0])
             value = str(curr_pr / len(outlinks))
-
             for link in outlinks:
                 sys.stdout.write('%s\t%s\n' % (link, value))
 
@@ -28,5 +27,4 @@ for line in sys.stdin:
         else:  # if node doesn't have outlinks
             curr_pr = line_info[0]
             sys.stdout.write('%s\t%s\n' % (node_id, curr_pr))
-
         sys.stdout.write('%s\tp,%s\n' % (node_id, line_tab[1]))
