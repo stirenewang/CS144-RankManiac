@@ -50,7 +50,7 @@ while i < len(top_curr) and converged:
 if converged == True:
     counter += 1
 
-if iteration == 49 or counter == 5:  # if converged
+if iteration == 35 or counter == 2:  # if converged
     top = top_curr[:20]
     for tup in top:
         sys.stdout.write('FinalRank:%s\t%s\n' % (str(tup[1]), tup[0]))
