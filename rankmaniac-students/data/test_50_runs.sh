@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-python pagerank_map.py < input_email.txt | sort | python pagerank_reduce.py | python process_map.py | sort | python process_reduce.py > int_output.txt
+python2 pagerank_map.py < input_email.txt | sort | python2 pagerank_reduce.py | python2 process_map.py | sort | python2 process_reduce.py > int_output.txt
 cat int_output.txt > int_input.txt
 
 for i in {1..49}
 do
 	echo "iter: ${i}"
-	python pagerank_map.py < int_input.txt | sort | python pagerank_reduce.py | python process_map.py | sort | python process_reduce.py > int_output.txt
+	python2 pagerank_map.py < int_input.txt | sort | python2 pagerank_reduce.py | python2 process_map.py | sort | python2 process_reduce.py > int_output.txt
 
 	if grep -q "FinalRank" int_output.txt
 	then

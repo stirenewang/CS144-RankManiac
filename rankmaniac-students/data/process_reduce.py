@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys
 import heapq
@@ -40,7 +40,7 @@ while i < len(top_curr) and converged:
 if converged == True:
     counter += 1
 
-if iteration == 49 or counter == 50:
+if iteration == 49 or counter == 2:
     top = top_curr[:20]
 
     for tup in top:

@@ -1,1 +1,0 @@
-update-alternatives --list python
