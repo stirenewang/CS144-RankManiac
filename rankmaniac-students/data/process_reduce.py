@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import sys
 import heapq
@@ -29,8 +29,8 @@ for line in sys.stdin:
         prev_pr.append((node_id, pr[1]))
 
 
-top_prev = heapq.nlargest(50, prev_pr, key=itemgetter(1))
-top_curr = heapq.nlargest(50, curr_pr, key=itemgetter(1))
+top_prev = heapq.nlargest(30, prev_pr, key=itemgetter(1))
+top_curr = heapq.nlargest(30, curr_pr, key=itemgetter(1))
 i  = 0
 while i < len(top_curr) and converged:
     if top_curr[i][0] != top_prev[i][0]:
