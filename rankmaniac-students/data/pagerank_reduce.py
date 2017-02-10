@@ -42,7 +42,7 @@ for n_id in pr_conts.keys():
     curr_pr = str(alpha * pr_conts[n_id] + 1.0 - alpha)  # calculates new pagerank
     prev_pr = graph_info[n_id][0]
 
-    if len(graph_data[n_id]) > 2:  # if node has outlinks
+    if len(graph_info[n_id]) > 2:  # if node has outlinks
         outlinks = graph_info[n_id][2:]
         outlinks = ','.join(outlinks)
         sys.stdout.write('%s\t%s,%s,%s\n' % (n_id, curr_pr, prev_pr, outlinks))

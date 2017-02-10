@@ -4,12 +4,18 @@ import sys
 import heapq
 from operator import itemgetter
 
+
+
 lines = []
 iteration = 0
 counter = 0
 converged = True
 curr_pr = []
 prev_pr = []
+
+'''
+line looks like one of these:
+'''
 
 for line in sys.stdin:
     lines.append(line)
