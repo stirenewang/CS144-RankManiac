@@ -23,7 +23,7 @@ c\t{counter}\n
 for line in sys.stdin:
     line_tab = line.split('\t')
 
-    if line_tab[0] == "i" or line_tab[0] == 'c':  # if line has iteration/counter
+    if line_tab[0] == 'i' or line_tab[0] == 'c':  # if line has iteration/counter
         sys.stdout.write(line)
     else:
         line_info = line_tab[1].strip().split(',', 3) 
@@ -31,10 +31,14 @@ for line in sys.stdin:
 
         if line_info[0] != 'p':  # if line has pagerank contribution, adds to pr_cont
             pr_cont = float(line_info[0])
-            try:
-                pr_conts[node_id] += pr_cont
-            except KeyError:
+            if node_id not in pr_conts.keys():
                 pr_conts[node_id] = pr_cont
+            else:
+                pr_conts[node_id] += pr_cont
+            # try:
+            #     pr_conts[node_id] += pr_cont
+            # except KeyError:
+            #     pr_conts[node_id] = pr_cont
         else: # if line contains p, adds to graph_info
             graph_info[node_id] = line_info[1:]
 
@@ -43,8 +47,7 @@ for n_id in pr_conts.keys():
     prev_pr = graph_info[n_id][0]
 
     if len(graph_info[n_id]) > 2:  # if node has outlinks
-        outlinks = graph_info[n_id][2:]
-        outlinks = ','.join(outlinks)
+        outlinks = graph_info[n_id][2]
         sys.stdout.write('%s\t%s,%s,%s\n' % (n_id, curr_pr, prev_pr, outlinks))
     else:
         sys.stdout.write('%s\t%s,%s\n' % (n_id, curr_pr, prev_pr))
